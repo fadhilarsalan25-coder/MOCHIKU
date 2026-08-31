@@ -1,0 +1,10 @@
+{
+  "name": "Remix MOCHIKU - Japanese Mochi Shop",
+  "description": "A sweet, kawaii Japanese mochi boutique offering customizable flavors and delicious toppings with authentic Indonesian Rupiah pricing.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
