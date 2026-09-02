@@ -1,76 +1,70 @@
-# MOCHIKU - Japanese Mochi Delights
+# MOCHIKU - Japanese Mochi Shop Prototype
 
-Welcome to MOCHIKU! Your go-to destination for delicious, affordable Japanese mochi with endless flavor combinations. 🍡
+A prototype design for a Japanese mochi shop application. This project showcases a user-friendly interface for browsing, customizing, and ordering authentic Japanese mochi.
 
-## About MOCHIKU
+## 🎨 Prototype Overview
 
-MOCHIKU is a Japanese mochi selling app that brings authentic mochi flavors right to your doorstep at incredibly affordable prices. Whether you're craving classic flavors or adventurous topping combinations, we've got something for everyone!
+This is a **design prototype** for a modern Japanese mochi e-commerce platform. The prototype demonstrates key user interface elements and user experience flows for an online mochi shop.
 
-## Why Choose MOCHIKU?
+## 📐 Design Features (Prototype)
 
-- 🍡 **Authentic Japanese Mochi** - Traditional recipes, premium quality
-- 💰 **Budget-Friendly Prices** - Rp 2.000 - Rp 5.000 per piece
-- 🎨 **Endless Flavor Combinations** - Mix and match your favorite flavors and toppings
-- 🚚 **Fast Delivery** - Fresh mochi delivered to your door
-- 📱 **Easy to Order** - Simple and user-friendly app interface
-- 🌟 **Fresh Daily** - Made fresh to order, never stale
+### Pages & Screens
+- **Homepage** - Hero section with featured mochi and promotions
+- **Product Catalog** - Grid view of available mochi varieties
+- **Product Detail** - Customization options (flavors, toppings, quantity)
+- **Shopping Cart** - Order review and modification
+- **Checkout** - Delivery and payment information
+- **Order Tracking** - Real-time order status updates
 
-## Featured Flavors
+### UI Components
+- Navigation menu/header
+- Product cards with images and descriptions
+- Flavor/topping selector with visual options
+- Add to cart buttons
+- Quantity controls
+- Price calculator
+- Review and rating system
+- Search functionality
 
-### Classic Flavors
-- 🍓 Strawberry
-- 🥭 Mango
-- 🍵 Green Tea (Matcha) 
-- 🍫 Cholocate
-- 🍪 Cookies
+### Design Elements
+- Color Scheme: Traditional Japanese aesthetics with modern touches
+- Typography: Clean, readable fonts
+- Icons: Illustrative emoji and custom icons
+- Responsive Layout: Mobile and desktop versions
 
-## Premium Toppings
+## 🛠️ Prototype Status
 
-- 🍪 Cookies
-- 🥭 Mango
-- 🍫 Chocolate Chips
-- 🍓 Strawberry
-  
-## Price List
+**Current Phase:** Design & Wireframing
 
-| Item | Price |
-|------|-------|
-| Single Mochi (1 piece) | Rp 2.000 |
-| Mochi Trio Pack (3 pieces) | Rp 5.000 |
+This prototype includes:
+- ✏️ UI/UX mockups and wireframes
+- 🎨 Visual design system
+- 📱 Responsive design layouts
+- 🔄 User flow diagrams
 
-## How to Order
+## 📁 Project Structure
 
-1. Download the MOCHIKU app
-2. Browse our delicious mochi selection
-3. Choose your favorite flavor and topping combinations
-4. Add to cart and proceed to checkout
-5. Select your delivery address
-6. Track your order in real-time
-7. Enjoy your fresh, delicious mochi! 🎉
+```
+MOCHIKU/
+├── assets/
+├── designs/
+├── mockups/
+└── README.md
+```
 
-## App Features
+## 🎯 Future Development
 
-- 🔍 **Create your dream mochi** - Find your favorite mochi quickly
-- ❤️ **Wishlist** - Save your favorite combinations
-- 💳 **Secure Payment** - Multiple payment options available
-- ⭐ **Customer Reviews** - Read what others love about us
-- 📦 **Order Tracking** - Know exactly when your mochi arrives
-- 🎁 **Special Promotions** - Exclusive app-only deals and discounts
+- [ ] Frontend implementation (React/Vue/etc)
+- [ ] Backend API development
+- [ ] Database design
+- [ ] Payment integration
+- [ ] Delivery system integration
+- [ ] User authentication
 
-## Quality Promise
+## 📝 Notes
 
-✅ Fresh ingredients only  
-✅ No artificial preservatives  
-✅ Handmade with care  
-✅ Hygienically packaged  
-✅ Quality guaranteed or your money back  
-
-## Thank You!
-
-Thank you for choosing MOCHIKU! We're committed to bringing joy and delicious mochi to your daily life at prices that won't break the bank.
-
-**Enjoy every chewy bite! 🍡✨**
+This is a **prototype design document** for concept validation and user testing purposes.
 
 ---
 
-*MOCHIKU - Where Tradition Meets Affordability*
+*MOCHIKU - Japanese Mochi Shop Prototype*
