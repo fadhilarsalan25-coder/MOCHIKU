@@ -12,6 +12,7 @@ interface NavbarProps {
   currentUser: UserAccount | null;
   onOpenAuth: (mode: 'signup' | 'signin') => void;
   onOpenProfile: () => void;
+  onOpenChatbot?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -22,6 +23,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   currentUser,
   onOpenAuth,
   onOpenProfile,
+  onOpenChatbot,
 }) => {
   return (
     <header className="sticky top-0 z-30 bg-[#FFFDF9]/90 backdrop-blur-md border-b border-[#FCE7F3] shadow-xs">
@@ -60,6 +62,25 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <span>📍 Outlet GPS</span>
           </button>
+
+          {/* Mochiku AI Concierge Trigger */}
+          {onOpenChatbot && (
+            <button
+              onClick={() => {
+                soundFX.playPop(520);
+                onOpenChatbot();
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-[#FFF0F5] via-[#FFE4EC] to-[#FFF5EA] hover:from-[#FFE4EC] hover:to-[#FED7AA] border border-[#FBCFE8] text-xs font-fredoka font-bold text-[#DB2777] shadow-2xs transition-all active:scale-95 cursor-pointer group"
+              title="Tanya Mochiku AI Concierge (Gemini Intelligence, Search & Maps Grounding)"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#DB2777] group-hover:rotate-12 transition-transform" />
+              <span className="hidden md:inline">Mochiku AI</span>
+              <span className="md:hidden">AI</span>
+              <span className="text-[10px] bg-[#DB2777] text-white px-1.5 py-0.2 rounded-full">
+                Gemini
+              </span>
+            </button>
+          )}
         </div>
 
         {/* Right Side: Account Actions (Sign Up / Get Started, Profile), Audio toggle & Cart */}

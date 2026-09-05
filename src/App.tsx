@@ -12,9 +12,17 @@ import { CheckoutModal } from './components/CheckoutModal';
 import { OrderSuccessModal } from './components/OrderSuccessModal';
 import { AuthModal } from './components/AuthModal';
 import { AccountProfileModal } from './components/AccountProfileModal';
+import { GeminiChatbotModal } from './components/GeminiChatbotModal';
 import { useRealtimeLocation } from './hooks/useRealtimeLocation';
 import { soundFX } from './utils/audio';
-import { auth, logoutFirebaseAuth, formatFirebaseUser } from './lib/firebase';
+import {
+  auth,
+  logoutFirebaseAuth,
+  formatFirebaseUser,
+  saveOrderToFirestore,
+  saveUserProfileToFirestore,
+  getUserProfileFromFirestore,
+} from './lib/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Sparkles, Heart, Gift, ShoppingBag, Star, ShieldCheck, Flame, Info, UserPlus, UserCheck, ArrowRight } from 'lucide-react';
 
@@ -37,6 +45,7 @@ export default function App() {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [authMode, setAuthMode] = useState<'signup' | 'signin'>('signup');
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isChatbotOpen, setIsChatbotOpen] = useState(false);
 
   // Cart state persisted to localStorage
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
@@ -66,10 +75,14 @@ export default function App() {
 
   // Listen to Firebase Auth state changes
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (fbUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (fbUser) => {
       if (fbUser) {
-        // If logged in via Firebase Auth, update currentUser
+        // Fetch saved profile from Firestore
+        const firestoreProfile = await getUserProfileFromFirestore(fbUser.uid);
         setCurrentUser((prev) => {
+          if (firestoreProfile) {
+            return firestoreProfile;
+          }
           if (prev && prev.id === fbUser.uid) {
             return {
               ...prev,
@@ -85,7 +98,7 @@ export default function App() {
     return () => unsubscribe();
   }, []);
 
-  // Sync user to localStorage
+  // Sync user to localStorage & Firestore
   useEffect(() => {
     try {
       if (currentUser) {
@@ -100,6 +113,7 @@ export default function App() {
           accounts.push(currentUser);
         }
         localStorage.setItem('mochiku_accounts_store', JSON.stringify(accounts));
+        saveUserProfileToFirestore(currentUser);
       } else {
         localStorage.removeItem('mochiku_user');
       }
@@ -247,6 +261,7 @@ export default function App() {
         currentUser={currentUser}
         onOpenAuth={handleOpenAuth}
         onOpenProfile={() => setIsProfileOpen(true)}
+        onOpenChatbot={() => setIsChatbotOpen(true)}
       />
 
       {/* Main Content Area */}
@@ -498,6 +513,7 @@ export default function App() {
           setIsCheckoutOpen(false);
           setLastOrder(order);
           setCartItems([]); // clear cart on success
+          saveOrderToFirestore(order);
 
           // Award Mochi Points to user if logged in
           if (currentUser) {
@@ -542,6 +558,44 @@ export default function App() {
         user={currentUser}
         onUpdateUser={handleUpdateUser}
         onLogout={handleLogout}
+      />
+
+      {/* Floating Gemini AI Sommelier Mascot Trigger */}
+      <aside aria-label="Mochiku AI Asisten Pintar" className="fixed bottom-6 right-6 z-40">
+        <button
+          id="floating-mochiku-ai-trigger"
+          onClick={() => {
+            soundFX.playPop(520);
+            setIsChatbotOpen(true);
+          }}
+          className="relative flex items-center gap-2 px-4 py-3 rounded-full bg-gradient-to-r from-[#FF85A2] via-[#F472B6] to-[#DB2777] text-white font-fredoka font-bold text-xs sm:text-sm shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all cursor-pointer group"
+          title="Tanya Mochiku AI Concierge (Gemini Chatbot, Google Search & Maps Grounding)"
+        >
+          <span className="text-xl group-hover:rotate-12 transition-transform select-none">🍡</span>
+          <span className="hidden xs:inline">Tanya Mochiku AI</span>
+          <span className="text-[10px] bg-white/25 px-1.5 py-0.2 rounded-full hidden sm:inline">
+            Gemini
+          </span>
+          <span className="flex h-2.5 w-2.5 relative">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-300 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-400"></span>
+          </span>
+        </button>
+      </aside>
+
+      {/* Gemini AI Multi-turn Chatbot & Grounding Modal */}
+      <GeminiChatbotModal
+        isOpen={isChatbotOpen}
+        onClose={() => setIsChatbotOpen(false)}
+        currentUser={currentUser}
+        onAddToCart={handleAddToCart}
+        onNavigateToMap={() => {
+          setIsChatbotOpen(false);
+          const mapEl = document.getElementById('mochiku-map-locator');
+          if (mapEl) {
+            mapEl.scrollIntoView({ behavior: 'smooth' });
+          }
+        }}
       />
 
     </div>

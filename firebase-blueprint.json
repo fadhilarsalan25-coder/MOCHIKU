@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "entities": {
+    "users": {
+      "path": "users/{userId}",
+      "description": "User profile with contact info, points, and favorite mochi preferences",
+      "properties": {
+        "id": { "type": "string", "description": "Firebase Auth UID" },
+        "name": { "type": "string", "description": "Full customer name" },
+        "email": { "type": "string", "description": "Email address" },
+        "phone": { "type": "string", "description": "Phone number" },
+        "defaultAddress": { "type": "string", "description": "Delivery address" },
+        "favoriteFlavor": { "type": "string", "description": "Favorite mochi flavor" },
+        "points": { "type": "number", "description": "Loyalty points earned" },
+        "memberTier": { "type": "string", "description": "VIP / Member tier" },
+        "avatarEmoji": { "type": "string", "description": "Cute mochi avatar" },
+        "pictureUrl": { "type": "string", "description": "Profile picture URL" },
+        "authProvider": { "type": "string", "description": "Auth provider" },
+        "joinedDate": { "type": "string", "description": "Formatted join date" }
+      },
+      "required": ["id", "name", "email"]
+    },
+    "orders": {
+      "path": "orders/{orderId}",
+      "description": "Mochi orders placed by customers",
+      "properties": {
+        "id": { "type": "string", "description": "Unique order ID" },
+        "userId": { "type": "string", "description": "Firebase Auth UID or guest ID" },
+        "customerName": { "type": "string", "description": "Recipient name" },
+        "customerPhone": { "type": "string", "description": "Contact phone" },
+        "deliveryAddress": { "type": "string", "description": "Delivery destination" },
+        "storeId": { "type": "string", "description": "Fulfilling store branch" },
+        "storeName": { "type": "string", "description": "Store branch name" },
+        "items": { "type": "array", "description": "Purchased mochi items" },
+        "totalAmount": { "type": "number", "description": "Subtotal in IDR" },
+        "deliveryFee": { "type": "number", "description": "Delivery fee in IDR" },
+        "finalTotal": { "type": "number", "description": "Final total in IDR" },
+        "paymentMethod": { "type": "string", "description": "Payment method" },
+        "orderStatus": { "type": "string", "description": "Order fulfillment status" },
+        "orderDate": { "type": "string", "description": "Order placement timestamp" }
+      },
+      "required": ["id", "customerName", "deliveryAddress", "items", "finalTotal"]
+    }
+  }
+}

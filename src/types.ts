@@ -125,3 +125,22 @@ export interface OrderRecord {
   total: number;
   status: 'confirmed' | 'preparing' | 'ready';
 }
+
+export type ChatModelMode = 'fast' | 'general' | 'search' | 'maps' | 'pro';
+
+export interface ChatGroundingSource {
+  title: string;
+  url: string;
+}
+
+export interface ChatMessage {
+  id: string;
+  role: 'user' | 'model';
+  content: string;
+  timestamp: string;
+  modelUsed?: string;
+  mode?: ChatModelMode;
+  groundingSources?: ChatGroundingSource[];
+  searchQueries?: string[];
+  placesCount?: number;
+}
