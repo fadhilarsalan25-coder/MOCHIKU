@@ -23,10 +23,28 @@ import {
 import firebaseConfigJson from "../../firebase-applet-config.json";
 import { UserAccount, FlavorId, OrderRecord } from "../types";
 
+// Determine active auth domain:
+// When running on Vercel (or when accessing mochiku-whzl.vercel.app),
+// use "mochiku-whzl.vercel.app" as the authDomain so Google OAuth popup
+// displays "Lanjutkan ke mochiku-whzl.vercel.app" directly via the Vercel rewrite.
+const resolveAuthDomain = (): string => {
+  if (typeof window !== "undefined") {
+    const host = window.location.hostname;
+    if (host.includes("mochiku-whzl.vercel.app") || host.endsWith(".vercel.app")) {
+      return "mochiku-whzl.vercel.app";
+    }
+  }
+  return (
+    (import.meta as any).env?.VITE_FIREBASE_AUTH_DOMAIN ||
+    firebaseConfigJson.authDomain ||
+    "mochiku-6b3c5.firebaseapp.com"
+  );
+};
+
 // Firebase configuration from provisioned applet config with env fallback
 export const firebaseConfig = {
   apiKey: firebaseConfigJson.apiKey || (import.meta as any).env?.VITE_FIREBASE_API_KEY,
-  authDomain: firebaseConfigJson.authDomain || (import.meta as any).env?.VITE_FIREBASE_AUTH_DOMAIN,
+  authDomain: resolveAuthDomain(),
   projectId: firebaseConfigJson.projectId || (import.meta as any).env?.VITE_FIREBASE_PROJECT_ID,
   storageBucket: firebaseConfigJson.storageBucket || (import.meta as any).env?.VITE_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: firebaseConfigJson.messagingSenderId || (import.meta as any).env?.VITE_FIREBASE_MESSAGING_SENDER_ID,
