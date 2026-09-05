@@ -17,13 +17,13 @@ import { UserAccount, FlavorId } from "../types";
 
 // User-provided Firebase configuration
 export const firebaseConfig = {
-  apiKey: "AIzaSyCvw8HLQF8iGXN2xcli7PCisFxHm1d4DkE",
-  authDomain: "mochiku-6b3c5.firebaseapp.com",
-  projectId: "mochiku-6b3c5",
-  storageBucket: "mochiku-6b3c5.firebasestorage.app",
-  messagingSenderId: "902753085097",
-  appId: "1:902753085097:web:eab8c9f432eaa93e51ebb8",
-  measurementId: "G-925SDPSKL1",
+  apiKey: (import.meta as any).env?.VITE_FIREBASE_API_KEY || "AIzaSyCvw8HLQF8iGXN2xcli7PCisFxHm1d4DkE",
+  authDomain: (import.meta as any).env?.VITE_FIREBASE_AUTH_DOMAIN || "mochiku-6b3c5.firebaseapp.com",
+  projectId: (import.meta as any).env?.VITE_FIREBASE_PROJECT_ID || "mochiku-6b3c5",
+  storageBucket: (import.meta as any).env?.VITE_FIREBASE_STORAGE_BUCKET || "mochiku-6b3c5.firebasestorage.app",
+  messagingSenderId: (import.meta as any).env?.VITE_FIREBASE_MESSAGING_SENDER_ID || "902753085097",
+  appId: (import.meta as any).env?.VITE_FIREBASE_APP_ID || "1:902753085097:web:eab8c9f432eaa93e51ebb8",
+  measurementId: (import.meta as any).env?.VITE_FIREBASE_MEASUREMENT_ID || "G-925SDPSKL1",
 };
 
 // Initialize Firebase App
